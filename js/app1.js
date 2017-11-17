@@ -1,4 +1,3 @@
-
 var map, clientID, clientSecret;
 var markers = [];
 
@@ -22,8 +21,8 @@ var LocationReference = function(data) {
 
     this.title = ko.observable(data.title);
     this.position = ko.observable(data.location);
-    this.lat = position.lat;
-    this.lng = position.lng;
+    this.lat = this.position.lat;
+    this.lng = this.position.lng;
     this.isVisible = ko.observable(true);
 
     this.street = '';
@@ -38,12 +37,12 @@ var LocationReference = function(data) {
     
     $.getJSON(foursquareUrl).done(function(data) {
       var response = data.response.venues[0];
-      this.street = response.location.formattedAddress[0] ? response.location.formattedAddress[0]: 'N/A';
-      this.city = response.location.formattedAddress[1] ? response.location.formattedAddress[1]: 'N/A';
-      this.zip = response.location.formattedAddress[3] ? response.location.formattedAddress[3]: 'N/A';
+      this.street = response.location.formattedAddress[0];
+      this.city = response.location.formattedAddress[1];
+      this.zip = response.location.formattedAddress[3];
     }).fail(function () {
       alert(
-        "There was in issue with the Foursquare API"
+        "There seems to be an issue with the Foursquare API"
       );
     });
 
@@ -192,8 +191,8 @@ function populateInfoWindow(marker, infowindow, street, city, zip) {
           });
           var streetViewService = new google.maps.StreetViewService();
           var radius = 50;
-          var infowindowContent = '<h4>' + marker.title + '</h4>' + '<p>' + marker.street + 
-                                  '<br>' + marker.city + '<br>' + marker.zip + '</p>';
+          var infowindowContent = '<h4>' + marker.title + '</h4>' + '<p>' + street + 
+                                  '<br>' + city + '<br>' + zip + '</p>';
           // In case the status is OK, which means the pano was found, compute the
           // position of the streetview image, then calculate the heading, then get a
           // panorama from that and set the options
