@@ -7,12 +7,23 @@
         <title>Map of Seattle</title>
     </head>
     <body>
-        
-        <div id="map"></div>
+        <div class="search" id="search">
+            <input class="search-box" id="search-box" data-bind="textInput: searchedLoc, valueUpdate: 'afterkeydown'"/>
+        </div>
+        <div class="app" id="app">
+            <div class="listview" id="listview">
+                <ul class="results" id="results" data-bind="foreach: newMarkers">
+                    <li class="location" id="location" data-bind="text: title"></li>
+                </ul>
+            </div>
+            <div class="map" id="map">There was an error loading Google Maps</div>
+        </div>
         <script async defer src =
             "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyAhGNpiSrWiO2L8AZRqQm2mSNI3nyshkzw&v=3&callback=initMap"> 
         </script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="js/lib/knockout-3.2.0.js"></script>
         <script src="js/app1.js"></script>
     </body>
-</html
+</html>
